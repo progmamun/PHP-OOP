@@ -26,9 +26,23 @@ class Database
     }
 
     // Function to insert into the database
-    public function insert()
+    public function insert($table, $params = array())
     {
+        if ($this->tableExists($table)) {
+            $table_columns = implode(', ', array_keys($params));
+            $table_value = implode(', ', $params);
 
+            $sql = "INSERT INTO $table ($table_columns) VALUES ($table_value)";
+            if ($this->mysqli->query($sql)) {
+                array_push($this->result, $this->mysqli->inset_id);
+                return true;
+            } else {
+                array_push($this->result, $this->mysqli->error);
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     // Function to delete table or row(s) from database
@@ -41,6 +55,27 @@ class Database
     public function select()
     {
 
+    }
+
+    private function tableExists($table)
+    {
+        $sql = "SHOW TABLES FROM $this->db_name LIKE '$table'";
+        $tableInDb = $this->mysqli->query($sql);
+        if ($tableInDb) {
+            if ($tableInDb->num_rows == 1) {
+                return true;
+            } else {
+                array_push($this->result, $table . "does not exist in this database.");
+                return false;
+            }
+        }
+    }
+
+    public function getResutlt()
+    {
+        $val = $this->result;
+        $this->result = array();
+        return $val;
     }
 
     // close connection
