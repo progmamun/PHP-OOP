@@ -87,8 +87,35 @@ class Database
     }
 
     // Function to SELECT from the database
-    public function select()
+    public function select($table, $rows = "*", $join = null, $where = null, $order = null, $limit = null)
     {
+        if ($this->tableExists($table)) {
+            $sql = "SELECT $rows FROM $table";
+            if ($join != null) {
+                $sql .= " JOIN $join";
+            }
+            if ($where != null) {
+                $sql .= " WHERE $where";
+            }
+            if ($order != null) {
+                $sql .= " ORDER BY $order";
+            }
+            if ($limit != null) {
+                $sql .= " LIMIT 0,$limit";
+            }
+
+            $query = $this->mysqli->query($sql);
+
+            if ($query) {
+                $this->result = $query->fetch_all(MYSQLI_ASSOC);
+                return true;
+            } else {
+                array_push($this->result, $this->mysqli->error);
+                return false;
+            }
+        } else {
+            return false;
+        }
 
     }
 
