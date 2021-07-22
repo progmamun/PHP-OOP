@@ -92,6 +92,20 @@ class Database
 
     }
 
+    public function sql($sql)
+    {
+        $query = $this->mysqli->query($sql);
+
+        if ($query) {
+            $this->result = $query->fetch_all(MYSQLI_ASSOC);
+            return true;
+        } else {
+            array_push($this->result, $this->mysqli->error);
+            return false;
+        }
+    }
+
+    // Private function to check if table exists for use with queries
     private function tableExists($table)
     {
         $sql = "SHOW TABLES FROM $this->db_name LIKE '$table'";

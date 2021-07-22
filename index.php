@@ -11,6 +11,11 @@ $obj = new Database();
 // echo "Update result is : ";
 // print_r($obj->getResult());
 
-$obj->delete('students', 'id="5"');
-// echo "Update result is : ";
+// $obj->delete('students', 'id="5"');
+// echo "Delete result is : ";
+// print_r($obj->getResult());
+
+$obj->sql('SELECT * FROM students');
+//obj->sql('SELECT * FROM students WHERE age = "20"');
+// echo "SQL result is : ";
 // print_r($obj->getResult());
