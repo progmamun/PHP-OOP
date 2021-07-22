@@ -7,6 +7,10 @@ $obj = new Database();
 // echo "Insert result is : ";
 // print_r($obj->getResult());
 
-$obj->update('students', ['student_name' => 'Al Mamun Khan', 'age' => '22', 'city' => 'Sujanagar'], 'id="6"'); // 'students' table name
-echo "Update result is : ";
-print_r($obj->getResult());
+// $obj->update('students', ['student_name' => 'Al Mamun Khan', 'age' => '22', 'city' => 'Sujanagar'], 'id="6"'); // 'students' table name
+// echo "Update result is : ";
+// print_r($obj->getResult());
+
+$obj->delete('students', 'id="5"');
+// echo "Update result is : ";
+// print_r($obj->getResult());
