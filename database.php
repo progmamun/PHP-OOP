@@ -55,7 +55,7 @@ class Database
                 $args[] = "$key = '$value'";
             }
 
-            $sql = "UPDATE $table SET " . implode(', ' . $args);
+            $sql = "UPDATE $table SET " . implode(', ', $args);
             if ($where != null) {
                 $sql .= " WHERE $where";
             }
