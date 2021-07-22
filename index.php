@@ -21,5 +21,6 @@ $obj = new Database();
 // print_r($obj->getResult());
 
 $obj->select('students', '*', null, null, null, null);
+//obj->select('students', 'id,student_name',null,'city="Delhi"','student_name',null);
 echo "Select result is : ";
 print_r($obj->getResult());
